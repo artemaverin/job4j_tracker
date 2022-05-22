@@ -6,5 +6,4 @@ public class ReportUsage {
         String text = report.generate("Report's name", "Report's body");
         System.out.println(text);
     }
-
 }
