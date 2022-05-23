@@ -24,4 +24,5 @@ public class Book {
     public void setPagesCount(int pagesCount) {
         this.pagesCount = pagesCount;
     }
+
 }
