@@ -7,7 +7,7 @@ import java.util.List;
 public class Tracker {
 
     private int ids = 1;
-    List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
 
     public Item add(Item item) {
         item.setId(ids++);
@@ -16,7 +16,7 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
     public List<Item> findByName(String key) {
