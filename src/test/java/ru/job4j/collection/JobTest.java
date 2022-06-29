@@ -25,9 +25,9 @@ public class JobTest {
     }
 
     @Test
-    public void whenComparatorByNameandPriorityAsc() {
-        Comparator<Job> cmpNamePriority = new JobAscByPriority().thenComparing(new JobAscByName());
-        int rsl = cmpNamePriority.compare(
+    public void whenComparatorByNameAndPriorityAsc() {
+        Comparator<Job> cmpPriorityName = new JobAscByPriority().thenComparing(new JobAscByName());
+        int rsl = cmpPriorityName.compare(
                 new Job("program error", 3),
                 new Job("refactoring", 2)
         );
@@ -36,45 +36,37 @@ public class JobTest {
 
     @Test
     public void whenComparatorByNameAsc() {
-        List<Job> jobs = Arrays.asList(
-                new Job("refactoring", 2),
-                new Job("Fix bug", 1)
-        );
-        int rsl = new Job("Fix bug", 1).compareTo(new Job("refactoring", 2));
-        jobs.sort(new JobAscByName());
+        Comparator<Job> cmpNameAsc = new JobAscByName();
+        int rsl = cmpNameAsc.compare(
+                new Job("Fix bug", 1),
+                new Job("refactoring", 2));
         assertThat(rsl, lessThan(0));
     }
 
     @Test
     public void whenComparatorByNameDesc() {
-        List<Job> jobs = Arrays.asList(
-                new Job("Impl task", 0),
-                new Job("program error", 3)
-        );
-        int rsl = new Job("program error", 3).compareTo(new Job("Impl task", 0));
-        jobs.sort(new JobDescByName());
-        assertThat(rsl, greaterThan(0));
+        Comparator<Job> cmpNameDesc = new JobDescByName();
+        int rsl = cmpNameDesc.compare(
+                new Job("program error", 3),
+                new Job("Impl task", 0));
+        assertThat(rsl, lessThan(0));
     }
 
     @Test
     public void whenComparatorByPriorityAsc() {
-        List<Job> jobs = Arrays.asList(
+        Comparator<Job> cmpPriorityAsc = new JobAscByPriority();
+        int rsl = cmpPriorityAsc.compare(
                 new Job("refactoring", 2),
-                new Job("Fix bug", 1)
-        );
-        int rsl = new Job("refactoring", 2).compareTo(new Job("Fix bug", 1));
-        jobs.sort(new JobAscByPriority());
+                new Job("Fix bug", 1));
         assertThat(rsl, greaterThan(0));
     }
 
     @Test
     public void whenComparatorByPriorityDesc() {
-        List<Job> jobs = Arrays.asList(
-                new Job("Impl task", 3),
-                new Job("program error", 3)
-        );
-        int rsl = new Job("program error", 3).compareTo(new Job("Impl task", 3));
-        jobs.sort(new JobDescByPriority());
+        Comparator<Job> cmpPriorityDesc = new JobDescByPriority();
+        int rsl = cmpPriorityDesc.compare(
+                new Job("program error", 3),
+                new Job("Impl task", 3));
         assertThat(rsl, is(0));
     }
 
