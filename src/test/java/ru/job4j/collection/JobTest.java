@@ -69,5 +69,4 @@ public class JobTest {
                 new Job("Impl task", 3));
         assertThat(rsl, is(0));
     }
-
 }
