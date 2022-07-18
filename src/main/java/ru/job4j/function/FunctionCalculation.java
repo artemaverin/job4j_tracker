@@ -7,7 +7,7 @@ import java.util.function.Function;
 public class FunctionCalculation {
     public List<Double> diapason(int start, int end, Function<Double, Double> func) {
         List<Double> res = new ArrayList<>();
-        while (start < end) {
+        for (int i = start; i < end; i++) {
             res.add(func.apply((double) start++));
         }
         return res;
