@@ -23,4 +23,5 @@ public class ProfilesTest {
         List<Address> expected = Arrays.asList(first, second, third);
         assertEquals(expected, result);
     }
+
 }
