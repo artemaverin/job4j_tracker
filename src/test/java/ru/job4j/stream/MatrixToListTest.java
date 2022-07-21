@@ -31,4 +31,5 @@ public class MatrixToListTest {
         List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertEquals(expected, result);
     }
+
 }
