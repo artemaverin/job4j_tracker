@@ -126,5 +126,4 @@ public class DepartmentsTest {
         Departments.sortDesc(input);
         assertThat(input, is(expect));
     }
-
 }
