@@ -3,12 +3,11 @@ package ru.job4j.stream;
 import java.util.Objects;
 
 public class Student {
-    private int score;
 
+    private int score;
     private String surname;
 
-    public Student(int score, String surname) {
-        this.score = score;
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
@@ -18,6 +17,11 @@ public class Student {
 
     public String getSurname() {
         return surname;
+    }
+
+    public Student(String surname, int score) {
+        this.score = score;
+        this.surname = surname;
     }
 
     @Override
@@ -30,11 +34,12 @@ public class Student {
         }
         Student student = (Student) o;
         return score == student.score
-                && Objects.equals(surname, student.surname);
+                && surname.equals(student.surname);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(score, surname);
     }
+
 }
