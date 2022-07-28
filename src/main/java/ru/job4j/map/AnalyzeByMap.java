@@ -79,6 +79,5 @@ public class AnalyzeByMap {
         }
         labels.sort(Comparator.naturalOrder());
         return labels.get(labels.size() - 1);
-
     }
 }

@@ -163,4 +163,5 @@ class AnalyzeByMapTest {
         );
         assertThat(best).isEqualTo(new Label("Math", 250D));
     }
+
 }
