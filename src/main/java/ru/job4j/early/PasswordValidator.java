@@ -1,5 +1,8 @@
 package ru.job4j.early;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class PasswordValidator {
 
     public static String validate(String password) {
@@ -7,8 +10,17 @@ public class PasswordValidator {
         int countUpperCase = 0;
         int countDigit = 0;
         int countSpec = 0;
+        List<String> list = Arrays.asList("qwerty", "12345", "password", "admin", "user");
+        if (password == null) {
+            throw new IllegalArgumentException("Password does not contain any symbol");
+        }
         if (password.length() < 8 || password.length() > 32) {
             throw new IllegalArgumentException("password length out of range");
+        }
+        for (String s : list) {
+            if (password.toLowerCase().contains(s.toLowerCase())) {
+                throw new IllegalArgumentException("Password contains forbidden words");
+            }
         }
         for (int i = 0; i < password.length(); i++) {
             if (Character.isLetter(password.charAt(i)) && Character.isUpperCase(password.charAt(i))) {
@@ -24,6 +36,7 @@ public class PasswordValidator {
                 countSpec++;
             }
         }
+
         if (countUpperCase == 0) {
             throw new IllegalArgumentException("Password does not contain at least one uppercase character");
         }
@@ -34,9 +47,9 @@ public class PasswordValidator {
             throw new IllegalArgumentException("Password does not contain numbers");
         }
         if (countSpec == 0) {
-            throw new IllegalArgumentException("The password does not contain");
+            throw new IllegalArgumentException("Password does not contain special symbols");
         }
 
-        return " password has been registered";
+        return "Password is valid";
     }
 }
