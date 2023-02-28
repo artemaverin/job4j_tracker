@@ -35,6 +35,9 @@ public class PasswordValidator {
             if (!Character.isDigit(password.charAt(i)) && !Character.isLetter(password.charAt(i))) {
                 countSpec++;
             }
+            if (countDigit > 0 && countSpec > 0 && countLowerCase > 0 && countUpperCase > 0) {
+                break;
+            }
         }
 
         if (countUpperCase == 0) {
