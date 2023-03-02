@@ -45,5 +45,4 @@ public class StartUI {
                 new Exit());
         new StartUI(output).init(input, store, actions);
     }
-
 }

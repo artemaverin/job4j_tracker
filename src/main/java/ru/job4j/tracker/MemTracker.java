@@ -67,5 +67,4 @@ public class MemTracker implements Store {
     public void close() throws Exception {
         System.out.println("заглушка");
     }
-
 }
