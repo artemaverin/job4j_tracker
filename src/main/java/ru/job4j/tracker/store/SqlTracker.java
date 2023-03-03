@@ -145,4 +145,5 @@ public class SqlTracker implements Store {
         sqlTracker.delete(2);
         System.out.println(sqlTracker.findById(3));
     }
+
 }

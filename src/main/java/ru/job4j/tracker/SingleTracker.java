@@ -40,5 +40,4 @@ public class SingleTracker {
     public boolean delete(int id) {
         return store.delete(id);
     }
-
 }
