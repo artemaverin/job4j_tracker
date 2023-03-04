@@ -144,7 +144,5 @@ public class SqlTracker implements Store {
         sqlTracker.replace(1, item3);
         sqlTracker.delete(2);
         System.out.println(sqlTracker.findById(3));
-
     }
-
 }
