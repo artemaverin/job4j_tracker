@@ -52,6 +52,11 @@ public class SqlTracker implements Store {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             statement.execute();
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    item.setId(resultSet.getInt(1));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,11 +143,11 @@ public class SqlTracker implements Store {
         SqlTracker sqlTracker = new SqlTracker();
         Item item1 = new Item("one");
         sqlTracker.add(item1);
-        Item item2 = new Item("two");
-        sqlTracker.add(item2);
-        Item item3 = new Item("dos");
-        sqlTracker.replace(1, item3);
-        sqlTracker.delete(2);
-        System.out.println(sqlTracker.findById(3));
+//        Item item2 = new Item("two");
+//        sqlTracker.add(item2);
+//        Item item3 = new Item("dos");
+//        sqlTracker.replace(1, item3);
+//        sqlTracker.delete(2);
+//        System.out.println(sqlTracker.findById(3));
     }
 }
