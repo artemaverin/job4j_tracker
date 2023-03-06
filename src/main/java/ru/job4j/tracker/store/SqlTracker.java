@@ -80,7 +80,7 @@ public class SqlTracker implements Store {
 
     @Override
     public boolean delete(int id) {
-        boolean res = true;
+        boolean res = false;
         try (PreparedStatement statement = cn.prepareStatement("delete from items where id = ?")) {
             statement.setInt(1, id);
             res = statement.executeUpdate() > 0;
@@ -115,9 +115,8 @@ public class SqlTracker implements Store {
             statement.setString(1, key);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                items.add(new Item(
-                        resultSet.getString("item_name")
-                ));
+                items.add(new Item(resultSet.getInt("id"),
+                        resultSet.getString("item_name")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +131,8 @@ public class SqlTracker implements Store {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                item = new Item(resultSet.getString("id"));
+                item = new Item(resultSet.getInt("id"),
+                        resultSet.getString("item_name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,15 +140,27 @@ public class SqlTracker implements Store {
         return item;
     }
 
+    public boolean deleteAll() {
+        boolean res = true;
+        try (PreparedStatement statement = cn.prepareStatement("delete from items; "
+                + "ALTER SEQUENCE items_id_seq RESTART WITH 1")) {
+            res = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     public static void main(String[] args) throws IOException {
         SqlTracker sqlTracker = new SqlTracker();
-        Item item1 = new Item("one");
-        sqlTracker.add(item1);
-        Item item2 = new Item("two");
-        sqlTracker.add(item2);
-        Item item3 = new Item("dos");
-        sqlTracker.replace(1, item3);
-        sqlTracker.delete(2);
-        System.out.println(sqlTracker.findById(3));
+//        Item item1 = new Item("one");
+//        sqlTracker.add(item1);
+//        Item item2 = new Item("two");
+//        sqlTracker.add(item2);
+//        Item item3 = new Item("dos");
+//        sqlTracker.replace(1, item3);
+        System.out.println(sqlTracker.delete(4));
+//        sqlTracker.deleteAll();
+        System.out.println(sqlTracker.findAll());
     }
 }
