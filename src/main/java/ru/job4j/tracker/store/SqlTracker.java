@@ -153,14 +153,13 @@ public class SqlTracker implements Store {
 
     public static void main(String[] args) throws IOException {
         SqlTracker sqlTracker = new SqlTracker();
-//        Item item1 = new Item("one");
-//        sqlTracker.add(item1);
-//        Item item2 = new Item("two");
-//        sqlTracker.add(item2);
-//        Item item3 = new Item("dos");
-//        sqlTracker.replace(1, item3);
+        Item item1 = new Item("one");
+        sqlTracker.add(item1);
+        Item item2 = new Item("two");
+        sqlTracker.add(item2);
+        Item item3 = new Item("dos");
+        sqlTracker.replace(1, item3);
         System.out.println(sqlTracker.delete(4));
-//        sqlTracker.deleteAll();
         System.out.println(sqlTracker.findAll());
     }
 }

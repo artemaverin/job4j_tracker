@@ -97,5 +97,4 @@ public class SqlTrackerTest {
         tracker.add(item2);
         assertThat(tracker.replace(item1.getId(), replace)).isTrue();
     }
-
 }
