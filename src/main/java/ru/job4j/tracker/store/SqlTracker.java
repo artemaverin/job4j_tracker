@@ -47,7 +47,7 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement statement = cn.prepareStatement("insert into items(item_name, created) values (?, ?)",
+        try (PreparedStatement statement = cn.prepareStatement("insert into items(name, created) values (?, ?)",
                 Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
@@ -67,7 +67,7 @@ public class SqlTracker implements Store {
     @Override
     public boolean replace(int id, Item item) {
         boolean res = true;
-        try (PreparedStatement statement = cn.prepareStatement("update items set item_name = ?, created = ? where id = ?")) {
+        try (PreparedStatement statement = cn.prepareStatement("update items set name = ?, created = ? where id = ?")) {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             statement.setInt(3, id);
@@ -98,7 +98,7 @@ public class SqlTracker implements Store {
                 while (resultSet.next()) {
                     items.add(new Item(
                             resultSet.getInt("id"),
-                            resultSet.getString("item_name")
+                            resultSet.getString("name")
                     ));
                 }
             }
@@ -111,12 +111,12 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement("select * from items where item_name = ?")) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items where name = ?")) {
             statement.setString(1, key);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 items.add(new Item(resultSet.getInt("id"),
-                        resultSet.getString("item_name")));
+                        resultSet.getString("name")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +132,7 @@ public class SqlTracker implements Store {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 item = new Item(resultSet.getInt("id"),
-                        resultSet.getString("item_name"));
+                        resultSet.getString("name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
