@@ -11,7 +11,6 @@ import java.time.temporal.ChronoUnit;
 @Table(name = "items")
 @Data
 public class Item {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
